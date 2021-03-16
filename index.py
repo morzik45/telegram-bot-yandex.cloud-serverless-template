@@ -18,9 +18,10 @@ dp.middleware.setup(LoggingMiddleware())
 async def handler(event, context):
     """Yandex.Cloud functions handler."""
     if event["httpMethod"] == 'POST':
+        token = event.get('params', {}).get('token')
         try:
             # Заложена возможность подставлять токен получая его из реквеста, для мультибота
-            with dp.bot.with_token(os.environ.get('TG_TOKEN'), validate_token=True):
+            with dp.bot.with_token(token, validate_token=True):
                 await register_handlers(dp=dp)
                 return await WebhookRequestHandler(dp=dp).post(event)
         except Exception as e:
