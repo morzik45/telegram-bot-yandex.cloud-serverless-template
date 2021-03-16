@@ -10,7 +10,7 @@ from handlers import register_handlers
 
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(token='0', parse_mode='HTML', validate_token=False)
+bot = Bot(token=os.environ.get('TG_TOKEN', 0), parse_mode='HTML', validate_token=False)
 dp = Dispatcher(bot=bot)
 dp.middleware.setup(LoggingMiddleware())
 
@@ -19,7 +19,8 @@ async def handler(event, context):
     """Yandex.Cloud functions handler."""
     if event["httpMethod"] == 'POST':
         try:
-            with dp.bot.with_token(os.environ.get('TOKEN'), validate_token=True):
+            # Заложена возможность подставлять токен получая его из реквеста, для мультибота
+            with dp.bot.with_token(os.environ.get('TG_TOKEN'), validate_token=True):
                 await register_handlers(dp=dp)
                 return await WebhookRequestHandler(dp=dp).post(event)
         except Exception as e:
