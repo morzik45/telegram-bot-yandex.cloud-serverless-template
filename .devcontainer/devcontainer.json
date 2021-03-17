@@ -42,6 +42,6 @@
 	"remoteUser": "morzik",
 	"containerUser": "morzik",
 	// Custom
-	"workspaceMount": "source=/home/morzik/projects/yc-aiogram,target=/workspace,type=bind,consistency=cached",
+	"workspaceMount": "source=/home/morzik/projects/yc-aiogram,target=/workspace,type=bind,consistency=delegated",
 	"workspaceFolder": "/workspace",
 }
