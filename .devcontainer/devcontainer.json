@@ -1,26 +1,8 @@
-<<<<<<< HEAD
 {
 	"name": "Python 3.8",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",
-=======
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.163.1/containers/python-3
-{
-	"name": "Python 3",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"context": "..",
-		"args": {
-			// Update 'VARIANT' to pick a Python version: 3, 3.6, 3.7, 3.8, 3.9
-			"VARIANT": "3.8",
-			// Options
-			"INSTALL_NODE": "true",
-			"NODE_VERSION": "lts/*"
-		}
-	},
->>>>>>> master
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/zsh",
@@ -39,28 +21,12 @@
 	},
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-<<<<<<< HEAD
 		"ms-python.python"
-=======
-		"ms-python.python",
-		"ms-python.vscode-pylance"
->>>>>>> master
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Use 'postCreateCommand' to run commands after the container is created.
-<<<<<<< HEAD
 	// "postCreateCommand": "pip3 install --user -r requirements.txt",
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
 }
-=======
-	"postCreateCommand": "pip3 install --user -r requirements.txt",
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "morzik",
-	"containerUser": "morzik",
-	// Custom
-	"workspaceMount": "source=/home/morzik/projects/yc-aiogram,target=/workspace,type=bind,consistency=delegated",
-	"workspaceFolder": "/workspace",
-}
->>>>>>> master

@@ -12,7 +12,6 @@ RESPONSE_TIMEOUT = 55
 
 
 class WebhookRequestHandler:
-
     def __init__(self, dp: Dispatcher):
         self.dispatcher = dp
         try:
@@ -28,7 +27,7 @@ class WebhookRequestHandler:
         :param event:
         :return: :class:`aiogram.types.Update`
         """
-        data = json.loads(event['body'])
+        data = json.loads(event["body"])
         update = types.Update.to_object(data)
         return update
 
@@ -48,12 +47,12 @@ class WebhookRequestHandler:
         response = self.get_response(results)
 
         return {
-                'headers': {
-                    'Content-Type': 'application/json',
-                },
-                'statusCode': 200,
-                'body': json.dumps(response.get_response()) if response else 'ok'
-            }
+            "headers": {
+                "Content-Type": "application/json",
+            },
+            "statusCode": 200,
+            "body": json.dumps(response.get_response()) if response else "ok",
+        }
 
     async def process_update(self, update):
         """
@@ -100,10 +99,12 @@ class WebhookRequestHandler:
         :param task:
         :return:
         """
-        print(f"Detected slow response into webhook. "
-              f"(Greater than {RESPONSE_TIMEOUT} seconds)\n"
-              f"Recommended to use 'async_task' decorator from Dispatcher for handler with long timeouts.",
-              TimeoutWarning)
+        print(
+            f"Detected slow response into webhook. "
+            f"(Greater than {RESPONSE_TIMEOUT} seconds)\n"
+            f"Recommended to use 'async_task' decorator from Dispatcher for handler with long timeouts.",
+            TimeoutWarning,
+        )
 
         dispatcher = self.dispatcher
         loop = dispatcher.loop or asyncio.get_event_loop()
@@ -111,8 +112,7 @@ class WebhookRequestHandler:
         try:
             results = task.result()
         except Exception as e:
-            loop.create_task(
-                dispatcher.errors_handlers.notify(dispatcher, types.Update.get_current(), e))
+            loop.create_task(dispatcher.errors_handlers.notify(dispatcher, types.Update.get_current(), e))
         else:
             response = self.get_response(results)
             if response is not None:
